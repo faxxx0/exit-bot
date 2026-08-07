@@ -1,0 +1,46 @@
+{
+  "_comment": "Exit thresholds — REQUIRED, fill these in before first run. No hardcoded fallback is used for these on purpose (a wrong silent default could mean no stop-loss).",
+  "_comment0": "takeProfitPct is OPTIONAL — null disables instant take-profit. Set it via the Telegram bot's Settings button, or here.",
+  "takeProfitPct": null,
+  "stopLossPct": null,
+  "_comment0b": "stopLossRequireOorLeft: when true, stop loss only fires if the position has ALSO broken out of range to the downside (OOR kiri). Optional, defaults to false. Toggleable live via the Telegram bot's Settings button.",
+  "stopLossRequireOorLeft": false,
+  "trailingTakeProfit": null,
+  "trailingTriggerPct": null,
+  "trailingDropPct": null,
+  "_comment0e": "outOfRangeExitEnabled: on/off switch for the out-of-range exit below. Optional, defaults to true. Toggleable live via the Telegram bot's Settings button.",
+  "outOfRangeExitEnabled": true,
+  "outOfRangeWaitMinutes": null,
+  "minFeePerTvl24h": null,
+  "minAgeBeforeYieldCheck": null,
+  "solMode": null,
+
+  "_comment0c": "Strategi Dual Side: exit rules khusus posisi dual-sided (liquidity di token X & Y sekaligus), terpisah dari TP/SL biasa di atas. dualSideStopLossMode: 'pnl_and_oor' (SL butuh PnL tembus SL% DAN oor kiri), 'oor_only' (SL langsung fire begitu oor kiri, PnL diabaikan), 'pnl_only' (SL fire dari PnL aja, oor diabaikan). Optional block, all default to off/null. Toggleable live via the Telegram bot's Settings button.",
+  "dualSideEnabled": false,
+  "dualSideTakeProfitPct": 5,
+  "dualSideStopLossPct": -15,
+  "dualSideStopLossMode": "oor_only",
+
+  "_comment0d": "Trailing TP khusus Dual Side — terpisah dari trailingTakeProfit biasa di atas, jadi posisi dual-side bisa punya trigger/drop sendiri. Optional, defaults to off/null. Toggleable live via the Telegram bot's Settings button.",
+  "dualSideTrailingEnabled": false,
+  "dualSideTrailingTriggerPct": 2,
+  "dualSideTrailingDropPct": 0.5,
+
+  "_comment1": "How long (seconds) to suppress take-profit/stop-loss/trailing-TP checks after a position is first seen, since Meteora's indexer can briefly report a stale ~-100% PnL right after open. Optional, defaults to 20.",
+  "exitGracePeriodSec": 20,
+
+  "_comment1b": "Extra safety net on top of exitGracePeriodSec: after a size top-up, keep suppressing exit/peak checks until reported PnL drops back within topupSettleTolerancePct of its pre-top-up value for topupSettleConfirmTicks consecutive polls (and at least topupSettleMinSec has elapsed), for up to topupMaxSettleSec before giving up and trusting the reading anyway. The min-time + consecutive-poll requirement matters: a single early reading can look 'settled' by coincidence (often right at 0% baseline) before the indexer's phantom-profit spike has even shown up, which used to clear this guard too soon. Optional, defaults shown below.",
+  "topupSettleTolerancePct": 3,
+  "topupSettleMinSec": 45,
+  "topupSettleConfirmTicks": 3,
+  "topupMaxSettleSec": 300,
+
+  "_comment2": "Operational parameters — have sane defaults, override if you want.",
+  "pollIntervalSec": 3,
+  "confirmTicks": 2,
+  "swapSlippageBps": 500,
+  "autoSwapAfterClose": true,
+
+  "_comment3": "Global auto-exit kill-switch. Also toggleable live via Telegram /pause /resume — this is just the on-disk default.",
+  "paused": false
+}

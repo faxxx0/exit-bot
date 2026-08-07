@@ -1,0 +1,18 @@
+{
+  "name": "exit-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Standalone Meteora DLMM exit bot — monitors manually-deployed positions and closes them on trailing TP / stop loss / out-of-range.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node scripts/patch-anchor.js"
+  },
+  "dependencies": {
+    "@meteora-ag/dlmm": "1.9.4",
+    "@solana/web3.js": "^1.95.0",
+    "bn.js": "^5.2.1",
+    "bs58": "^5.0.0",
+    "dotenv": "^16.4.7"
+  }
+}
